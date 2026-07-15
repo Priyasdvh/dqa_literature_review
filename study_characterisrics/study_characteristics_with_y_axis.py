@@ -14,19 +14,28 @@ from matplotlib.patches import Rectangle
 BASE_DIR = Path(__file__).resolve().parent
 
 # Run normally:
-#   python3 study_characteristics.py
+#   python3 study_characteristics_with_y_axis.py
 #
 # Or provide a different workbook:
-#   python3 study_characteristics.py path/to/workbook.xlsx
+#   python3 study_characteristics_with_y_axis.py path/to/workbook.xlsx
+
+DEFAULT_EXCEL_PATH = BASE_DIR / "Additional_file_1_study_characteristics.xlsx"
+
+# Ignore Jupyter/IPython arguments such as --f=...
+valid_args = [
+    arg for arg in sys.argv[1:]
+    if not arg.startswith("-")
+]
+
 EXCEL_PATH = (
-    Path(sys.argv[1]).expanduser().resolve()
-    if len(sys.argv) > 1
-    else BASE_DIR / "Additional_file_1_study_characteristics.xlsx"
+    Path(valid_args[0]).expanduser().resolve()
+    if valid_args
+    else DEFAULT_EXCEL_PATH
 )
 
 SHEET_NAME = "study_characteristics"
 
-OUTPUT_PATH = BASE_DIR / "study_characteristics_results.png"
+OUTPUT_PATH = BASE_DIR / "study_characteristics_results_with_y_axis.png"
 
 
 # ============================================================
@@ -240,6 +249,12 @@ check_unmapped(
     "country",
 )
 
+check_unmapped(
+    df["Healthcare domain"],
+    df["Healthcare domain group"],
+    "healthcare-domain",
+)
+
 
 # ============================================================
 # 5. Define labels and calculate counts
@@ -289,7 +304,6 @@ parts = [
             df["Study design group"],
             study_design_labels,
         ),
-        # One colour for the complete panel, following the reviewer comment.
         "color": "#4C78A8",
     },
     {
@@ -370,7 +384,7 @@ fig, ax = plt.subplots(
 fig.patch.set_facecolor("white")
 ax.set_facecolor("white")
 
-ax.set_xlim(0, total_columns)
+ax.set_xlim(-0.85, total_columns)
 ax.set_ylim(0, total_height)
 ax.axis("off")
 
@@ -500,7 +514,8 @@ for part in parts:
             va="center",
             rotation=90,
             fontsize=12,
-            fontweight="bold",family="serif",
+            fontweight="bold",
+            family="serif",
             color=text_color,
         )
 

@@ -32,15 +32,27 @@ ELEMENT_COLS = [
 
 # DQ-dimension display order (top -> bottom) and one signature colour each
 DQD_ORDER = [
-    "Completeness", "Conformance", "Plausibility", "Consistency",
-    "Accuracy / Correctness", "Concordance", "Uniqueness",
-    "Currency", "Relevance/Validity", "Temporal Relationships",
+    "Completeness",
+    "Conformance",
+    "Plausibility",
+    "Consistency",
+    "Accuracy / Correctness / Validity",
+    "Concordance",
+    "Currency",
+    "Uniqueness",
+    "Temporal Relationships",
 ]
+
 DQD_COLORS = {
-    "Completeness": "#1B9E8A", "Conformance": "#2E7FB8", "Plausibility": "#8E44AD",
-    "Consistency": "#B8860B", "Accuracy / Correctness": "#D62728",
-    "Concordance": "#C2185B", "Uniqueness": "#2E8B57", "Currency": "#7F7F7F",
-    "Relevance/Validity": "#E07B39", "Temporal Relationships": "#555555",
+    "Completeness": "#1B9E8A",
+    "Conformance": "#2E7FB8",
+    "Plausibility": "#8E44AD",
+    "Consistency": "#B8860B",
+    "Accuracy / Correctness / Validity": "#D62728",
+    "Concordance": "#C2185B",
+    "Currency": "#7F7F7F",
+    "Uniqueness": "#2E8B57",
+    "Temporal Relationships": "#555555",
 }
 
 # Two-line wrapping for long labels (purely cosmetic)
