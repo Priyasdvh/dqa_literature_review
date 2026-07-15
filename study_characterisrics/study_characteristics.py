@@ -13,11 +13,6 @@ from matplotlib.patches import Rectangle
 
 BASE_DIR = Path(__file__).resolve().parent
 
-# Run normally:
-#   python3 study_characteristics_with_y_axis.py
-#
-# Or provide a different workbook:
-#   python3 study_characteristics_with_y_axis.py path/to/workbook.xlsx
 
 DEFAULT_EXCEL_PATH = BASE_DIR / "Additional_file_1_study_characteristics.xlsx"
 
@@ -35,7 +30,7 @@ EXCEL_PATH = (
 
 SHEET_NAME = "study_characteristics"
 
-OUTPUT_PATH = BASE_DIR / "study_characteristics_results_with_y_axis.png"
+OUTPUT_PATH = BASE_DIR / "study_characteristics_results_figure.png"
 
 
 # ============================================================

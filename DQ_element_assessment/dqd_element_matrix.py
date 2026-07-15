@@ -1,9 +1,6 @@
 """
 DQD -> Issue Theme -> Affected Data Element  (dot matrix figure)
 ================================================================
-Reads the matrix workbook and renders the hierarchical dot-matrix figure:
-rows are issue themes grouped by DQ dimension, columns are data elements,
-and a coloured dot marks each theme->element link (coloured by dimension).
 
 Input  : DQD_Theme_Element_Matrix.xlsx   (sheet "Matrix", with X marks)
 Output : DQD_Theme_Element_Matrix.png
@@ -18,7 +15,7 @@ import matplotlib.pyplot as plt
 # ── Config ────────────────────────────────────────────────────────────────────
 EXCEL_PATH  = "DQD_Theme_Element_Matrix.xlsx"
 SHEET       = "Matrix"
-OUTPUT_PATH = "DQD_Theme_Element_Matrix.png"
+OUTPUT_PATH = "DQD_Theme_Element_matrix.png"
 DPI         = 300
 DOT_SIZE    = 320          # marker size for each link (stars read better larger)
 TITLE       = "Data Quality Theme & Affected Data Elements"

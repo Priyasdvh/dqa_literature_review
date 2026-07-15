@@ -1,10 +1,6 @@
 """
 Create two separate colourful figures from DQ_Dimensions_Matrix.xlsx:
 
-1. DQ_Dimensions_Figure_Colorful.png
-2. DQ_Methods_Figure_Colorful.png
-
-Keep this script and the Excel file in the same folder.
 """
 
 from pathlib import Path
@@ -24,8 +20,8 @@ BASE_DIR = Path(__file__).resolve().parent
 EXCEL_PATH = BASE_DIR / "DQ_Dimensions_Matrix.xlsx"
 SHEET_NAME = "DQ_Dimensions_Matrix"
 
-OUT_DIM_PATH = BASE_DIR / "DQ_Dimensions_Figure_Colorful.png"
-OUT_METH_PATH = BASE_DIR / "DQ_Methods_Figure_Colorful.png"
+OUT_DIM_PATH = BASE_DIR / "DQ_Dimensions_figure.png"
+OUT_METH_PATH = BASE_DIR / "DQ_Methods_figure.png"
 
 
 # ============================================================
