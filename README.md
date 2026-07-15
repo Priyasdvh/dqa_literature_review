@@ -24,22 +24,6 @@ The repository supports the generation of three main visualisations:
 
 ---
 
-## Repository Structure
-
-```text
-dqa_literature_review/
-├── README.md
-├── DQ_Dimensions_Matrix.xlsx
-├── DQD_Theme_Element_Matrix.xlsx
-├── generate_dq_dimensions_methods.py
-├── generate_dqd_theme_element_matrix.py
-├── DQ_Dimensions_Figure.png
-├── DQ_Methods_Figure.png
-└── DQD_Theme_Element_Matrix.png
-```
-
----
-
 ## Data Statement
 
 This repository contains data extracted from published scientific studies and code used to generate systematic-review figures.
