@@ -55,8 +55,8 @@ Dresden, Germany
 
 ---
 
-## Copyright
+## License
 
-Copyright © 2026 Vishnu Priya and contributors.
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
 
-All rights are reserved unless otherwise specified in a separate `LICENSE` file.
+Copyright © 2025 Vishnu Priya
