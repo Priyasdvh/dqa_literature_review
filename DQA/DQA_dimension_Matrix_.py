@@ -20,8 +20,8 @@ BASE_DIR = Path(__file__).resolve().parent
 EXCEL_PATH = BASE_DIR / "DQ_Dimensions_Matrix.xlsx"
 SHEET_NAME = "DQ_Dimensions_Matrix"
 
-OUT_DIM_PATH = BASE_DIR / "DQ_Dimensions_figure.png"
-OUT_METH_PATH = BASE_DIR / "DQ_Methods_figure.png"
+OUT_DIM_PATH = BASE_DIR / "Figure_3_Data_Quality_Dimensions.png"
+OUT_METH_PATH = BASE_DIR / "Figure_4_Data_Quality_Assessment_Methods.png"
 
 
 # ============================================================
@@ -317,16 +317,18 @@ def draw_figure(
 
     fig.patch.set_facecolor("white")
 
-    fig.suptitle(
-        title,
-        fontsize=title_fontsize,
-        fontweight="bold",
-        y=0.985,
-    )
+    # Add a title only when a non-empty title is supplied.
+    if title:
+        fig.suptitle(
+            title,
+            fontsize=title_fontsize,
+            fontweight="bold",
+            y=0.985,
+        )
 
-    # --------------------------------------------------------
+    # ========================================================
     # Top bar chart
-    # --------------------------------------------------------
+    # ========================================================
 
     bars = bar_axis.bar(
         x_positions,
@@ -369,15 +371,16 @@ def draw_figure(
         labelsize=10,
     )
 
+    # Keep the upper chart visually open.
     bar_axis.spines["top"].set_visible(False)
     bar_axis.spines["right"].set_visible(False)
     bar_axis.spines["left"].set_color("#CCCCCC")
     bar_axis.spines["bottom"].set_color("#CCCCCC")
     bar_axis.set_facecolor("white")
 
-    # --------------------------------------------------------
+    # ========================================================
     # Bottom star matrix
-    # --------------------------------------------------------
+    # ========================================================
 
     for row_index in range(number_studies):
         for column_index in range(number_columns):
@@ -453,29 +456,49 @@ def draw_figure(
         pad=x_label_pad,
     )
 
-    matrix_axis.spines["top"].set_visible(False)
-    matrix_axis.spines["right"].set_visible(False)
-    matrix_axis.spines["left"].set_color("#CCCCCC")
-    matrix_axis.spines["bottom"].set_color("#CCCCCC")
+    # Add a thin outer border around the complete star matrix.
+    for spine in matrix_axis.spines.values():
+        spine.set_visible(True)
+        spine.set_color("#808080")
+        spine.set_linewidth(0.8)
+
     matrix_axis.set_facecolor("white")
 
-    # Leave additional room for the rotated x-axis labels.
+    # Leave room for the rotated x-axis labels.
+    if title:
+        layout_rectangle = [0.01, 0.045, 0.995, 0.965]
+    else:
+        layout_rectangle = [0.01, 0.045, 0.995, 0.995]
+
     fig.tight_layout(
-        rect=[0.01, 0.045, 0.995, 0.965],
+        rect=layout_rectangle,
         h_pad=0.4,
     )
 
+    # Save a 300-DPI PNG version.
     fig.savefig(
         output_path,
         dpi=DPI,
         bbox_inches="tight",
+        pad_inches=0.05,
+        facecolor="white",
+    )
+
+    # Save a vector PDF version.
+    pdf_path = output_path.with_suffix(".pdf")
+
+    fig.savefig(
+        pdf_path,
+        bbox_inches="tight",
+        pad_inches=0.05,
         facecolor="white",
     )
 
     plt.show()
     plt.close(fig)
 
-    print(f"\nSaved: {output_path}")
+    print(f"\nSaved PNG: {output_path}")
+    print(f"Saved PDF: {pdf_path}")
 
 
 # ============================================================
@@ -485,11 +508,11 @@ def draw_figure(
 draw_figure(
     matrix=dim_matrix,
     labels=DIM_LABELS,
-    title="Data Quality Dimensions Addressed",
+    title="",
     colors=DIM_COLORS,
     figsize=FIGSIZE_DIM,
     output_path=OUT_DIM_PATH,
-    star_size=145,
+    star_size=175,
     x_label_fontsize=11,
     x_label_rotation=32,
     x_label_pad=8,
@@ -499,23 +522,22 @@ draw_figure(
 
 
 # ============================================================
-# 12. Figure 2: DQA methods
+# Figure 4: DQA methods
 # ============================================================
 
 draw_figure(
     matrix=meth_matrix,
     labels=METH_LABELS,
-    title="Data Quality Assessment Methods Applied",
+    title="",
     colors=METH_COLORS,
     figsize=FIGSIZE_METH,
     output_path=OUT_METH_PATH,
-    star_size=155,
+    star_size=185,
     x_label_fontsize=10,
     x_label_rotation=35,
     x_label_pad=7,
     y_label_fontsize=9,
     title_fontsize=16,
 )
-
 
 print("\nDone.")
